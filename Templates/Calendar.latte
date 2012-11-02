@@ -1,0 +1,35 @@
+{snippet calendar}
+	<div>
+		<table border="0">
+			<thead>
+				<tr>
+					<td colspan="2"><a n:href="PrevMonth $monthNumber, $actualYear" class="ajax"><<</a></td>
+					<td colspan="3">{$actualMonth} {$actualYear}</td>
+					<td colspan="2"><a n:href="NextMonth $monthNumber, $actualYear" class="ajax">>></a></td>
+				</tr>
+				<tr>
+					<td>PO</td>
+					<td>ÚT</td>
+					<td>ST</td>
+					<td>ČT</td>
+					<td>PÁ</td>
+					<td>SO</td>
+					<td>NE</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr n:foreach="$calendar as $row">
+					<td n:foreach="$row as $day"{if in_array($day.'.'.$monthNumber.'.'.$actualYear, $events)} class="akce"{/if}>
+						{if $day != 0}
+							{if in_array($day.'.'.$monthNumber.'.'.$actualYear, $events)}
+                                <a href="{plink events $actualYear.'-'.$monthNumber.'-'.$day}">{$day}</a>
+								{else}
+								{$day}
+							{/if}
+						{/if}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+{/snippet}
