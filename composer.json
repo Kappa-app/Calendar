@@ -1,0 +1,24 @@
+{
+    "name": "Kappa/Calendar",
+    "description": "Easy system for work with events",
+    "keywords": ["framework", "Nette", "Kappa", "Calendar", "Events", "Manager"],
+    "homepage": "https://github.com/Kappa-org/Calendar",
+    "license": "",
+    "minimum-stability":"dev",
+
+    "authors": [
+        {
+            "name": "Ondřej Záruba",
+            "homepage": "http://zaruba-ondrej.cz/"
+        }
+    ],
+
+    "support":{
+        "email":"zarubaondra@gmail.com",
+        "issues":""
+    },
+
+    "autoload": {
+        "classmap": {"Calendar/": ""}
+    }
+}
