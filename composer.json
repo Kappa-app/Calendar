@@ -1,5 +1,5 @@
 {
-    "name": "Kappa/Calendar",
+    "name": "kappa/calendar",
     "description": "Easy system for work with events",
     "keywords": ["framework", "Nette", "Kappa", "Calendar", "Events", "Manager"],
     "homepage": "https://github.com/Kappa-org/Calendar",
