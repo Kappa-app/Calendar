@@ -5,7 +5,6 @@
  * Date: 2.11.12
  */
 
-
 namespace Kappa\Packages\Calendar;
 
 class CalendarControl extends \Nette\Application\UI\Control
@@ -48,14 +47,6 @@ class CalendarControl extends \Nette\Application\UI\Control
 		parent::__construct();
 		$this->actualMonth = date('n');
 		$this->actualYear = date('Y');
-	}
-
-	/**
-	 * @param \Nette\Http\Session $session
-	 */
-	public function setSession(\Nette\Http\Session $session)
-	{
-		$this->_session = $session;
 	}
 
 	/**
