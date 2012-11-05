@@ -23,10 +23,9 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory
 	}
 
 	/**
-	 * @param $data
 	 * @return CalendarControl
 	 */
-	public function create($data)
+	public function create()
 	{
 		$calendar = new \Kappa\Packages\Calendar\CalendarControl;
 		$calendar->setEvents($this->data);
