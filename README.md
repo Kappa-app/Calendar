@@ -63,10 +63,10 @@ When you create component you can use three method for add setting for calendar
 <pre>
 	$events = array(
 		'12.1.2013' => array(
-                        '1:00' => true,
-                	'2:00' => false
-                        ),
-                );
+			'1:00' => true,
+			'2:00' => false
+			),
+		);
 	$calendarFactory->setEvents($events);
 
 </pre>
