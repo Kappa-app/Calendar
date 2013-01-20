@@ -50,6 +50,11 @@ class CalendarControl extends Kappa\Application\UI\Control
 	 */
 	private $events;
 
+	/**
+	 * @var array
+	 */
+	private $blockDays;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -79,6 +84,11 @@ class CalendarControl extends Kappa\Application\UI\Control
 	public function setEvents(array $events = array())
 	{
 		$this->events = $events;
+	}
+
+	public function setBlockDays(array $blockDays = array())
+	{
+		$this->blockDays = $blockDays;
 	}
 
 	/**
@@ -142,19 +152,23 @@ class CalendarControl extends Kappa\Application\UI\Control
 					if($day <= date('t', $mktimeMonth))
 					{
 						$mktimeDay = mktime(0, 0, 0, $this->actualMonth, $day, $this->actualYear);
-						$hours['day'] = $day;
+						$contain['day'] = $day;
 						$today = date('j.n.Y', $mktimeDay);
-						$hours['date'] = $today;
+						$contain['date'] = $today;
+						if(in_array($today, $this->blockDays) || in_array(date('D', $mktimeDay), $this->blockDays))
+							$contain['blocked'] = true;
+						else
+							$contain['blocked'] = false;
 						if(array_key_exists($today, $this->events))
 						{
 
 							foreach($this->events[$today] as $time => $bool)
 							{
-								$hours[$time] = $bool;
+								$contain[$time] = $bool;
 							}
 
 						}
-						$calendar[$y][$i] = $hours;
+						$calendar[$y][$i] = $contain;
 						$hours = array();
 					}
 					else
