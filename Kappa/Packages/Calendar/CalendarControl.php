@@ -192,6 +192,7 @@ class CalendarControl extends Kappa\Application\UI\Control
 		$this->template->actualMonth = $this->month[$this->actualMonth]; 
 		$this->template->actualYear = $this->actualYear;
 		$this->template->calendar = $this->createCalendar();
+		$this->template->calendarHelper = new CalendarHelper;
 		$this->template->render();	
 	}
 }
