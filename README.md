@@ -8,10 +8,10 @@ Calendar can detect actual day (add class="today"), busy days (add class="busy")
 1. Added Kappa:Calendar into your project
 <pre>
 	"require":{
-                "php": ">= 5.3.0",
-         	"kappa/framewrok": "dev-master",
-         	"kappa/calendar": "dev-master",
-         	"nette/nette": "dev-master"
+		"php": ">= 5.3.0",
+		"kappa/framewrok": "dev-master",
+		"kappa/calendar": "dev-master",
+		"nette/nette": "dev-master"
          }
 </pre>
 2. Run [Composer](http://getcomposer.org)
