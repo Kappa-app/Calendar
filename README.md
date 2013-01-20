@@ -73,6 +73,7 @@ When you create component you can use three method for add setting for calendar
 
 ####setBlockDays()
 Allowable entries:
+
 1. A textual representation of a day, three letters (example "Mon") // Every Monday will be blocked
 
 2. Date (example "1.1.2013") // Date 1.1.2013 will be blocked
