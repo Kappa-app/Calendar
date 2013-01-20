@@ -19,13 +19,9 @@
 			</thead>
 			<tbody>
 				<tr n:foreach="$calendar as $row">
-					<td n:foreach="$row as $day"{if in_array($day.'.'.$monthNumber.'.'.$actualYear, $events)} class="akce"{/if}>
+					<td n:foreach="$row as $dayNumber => $day">
 						{if $day != 0}
-							{if in_array($day.'.'.$monthNumber.'.'.$actualYear, $events)}
-                                <a href="{plink events $actualYear.'-'.$monthNumber.'-'.$day}">{$day}</a>
-								{else}
-								{$day}
-							{/if}
+							{$day['day']}
 						{/if}
 					</td>
 				</tr>
