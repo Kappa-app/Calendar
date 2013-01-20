@@ -31,6 +31,6 @@
 	},
 
 	"autoload": {
-		"psr-0": {"Kappa\\Packages\\Calendar": "Calendar/"}
+		"psr-0": {"Kappa\\Packages\\Calendar": "./"}
 	}
 }
