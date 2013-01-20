@@ -7,7 +7,9 @@
 
 namespace Kappa\Packages\Calendar;
 
-class CalendarControl extends \Nette\Application\UI\Control
+use Kappa;
+
+class CalendarControl extends Kappa\Application\UI\Control
 {
 	/**
 	 * @var array
@@ -138,20 +140,25 @@ class CalendarControl extends \Nette\Application\UI\Control
 						$mktimeDay = mktime(0, 0, 0, $this->actualMonth, $day, $this->actualYear);
 						$hours['day'] = $day;
 						$today = date('j.n.Y', $mktimeDay);
+						$hours['date'] = $today;
 						if(array_key_exists($today, $this->events))
+						{
+
 							foreach($this->events[$today] as $time => $bool)
 							{
 								$hours[$time] = $bool;
 							}
 
+						}
 						$calendar[$y][$i] = $hours;
+						$hours = array();
 					}
 					else
-						$calendar[$y][$i] = 0;
+						$calendar[$y][$i] = array();
 					$day++;
 				}
 				else
-					$calendar[$y][$i] = 0;
+					$calendar[$y][$i] = array();
 			}
 		}
 		return $calendar;
