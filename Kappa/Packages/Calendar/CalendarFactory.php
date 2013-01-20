@@ -22,6 +22,11 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements IC
 	private $events = array();
 
 	/**
+	 * @var array
+	 */
+	private $blockDays = array();
+
+	/**
 	 * @param null $template
 	 * @throws \Kappa\Exceptions\LogicException\InvalidArgumentException
 	 */
@@ -38,6 +43,11 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements IC
 		$this->events = $events;
 	}
 
+	public function setBlockDays(array $blockDays = array())
+	{
+		$this->blockDays = $blockDays;
+	}
+
 	/**
 	 * @return CalendarControl
 	 */
@@ -46,6 +56,7 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements IC
 		$calendar = new CalendarControl;
 		$calendar->setTemplate($this->template);
 		$calendar->setEvents($this->events);
+		$calendar->setBlockDays($this->blockDays);
 		return $calendar;
 	}
 }
