@@ -172,7 +172,7 @@ class CalendarControl extends Kappa\Application\UI\Control
 
 						}
 						$calendar[$y][$i] = $contain;
-						$hours = array();
+						$contain = array();
 					}
 					else
 						$calendar[$y][$i] = array();
