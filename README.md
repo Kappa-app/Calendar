@@ -34,10 +34,8 @@ or
 </pre>
 5. Create component Calendar
 <pre>
-	/**
-	 * @var Kappa\Packages\Calendar\CalendarFactory
-	 */
 	protected $calendarFactory;
+
 	protected function createComponentCalendar()
 	{
 		$calendar = $this->calendarFactory;
