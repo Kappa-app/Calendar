@@ -51,15 +51,41 @@ or
 	}
 </pre>
 
-###The data structure for the method setEvents()
+###Configuration
+When you create component you can use three method for add setting for calendar
 <pre>
-	array(
-		'12.1.2013' => array(
-			'1:00' => true,
-			'2:00' => false
-		),
-	);
+	$caledarFactory->setEvets(/* array */);
+	$caledarFactory->setBlockDays(/* array */);
+	$caledarFactory->setTemplate(/* string - path to file */);
 </pre>
+
+####setEvents()
+<pre>
+	$events = array(
+		'12.1.2013' => array(
+                        '1:00' => true,
+                	'2:00' => false
+                        ),
+                );
+	$calendarFactory->setEvents($events);
+
+</pre>
+
+####setBlockDays()
+Allowable entries:
+1. A textual representation of a day, three letters (example "Mon") // Every Monday will be blocked
+2. Date (example "1.1.2013") // Date 1.1.2013 will be blocked
+
+<pre>
+	$blockDays = array('Mon', '1.1.2013'); // Every Monday and 1.1.2013
+	$calendarFactory->setBlockDays($blockDays);
+</pre>
+
+####setTemplate()
+<pre>
+	$template = __DIR__ . '/../templates/components/calendar.latte';
+	$calendarFactory->setTemplate($template);
+ </pre>
 
 ###Requirements:
 -
