@@ -7,19 +7,42 @@
 
 namespace Kappa\Packages\Calendar;
 
-class CalendarFactory extends \Kappa\Application\UI\ControlFactory
+use Kappa\Exceptions\LogicException\InvalidArgumentException;
+
+class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements ICalendarFactory
 {
 	/**
-	 * @var type array
+	 * @var string
 	 */
-	private $data;
+	private $template;
 
 	/**
-	 * @param array $data
+	 * @var array
 	 */
-	public function setEvents($data)
+	private $events;
+
+	/**
+	 * @param null $template
+	 * @throws \Kappa\Exceptions\LogicException\InvalidArgumentException
+	 */
+	public function setTemplate($template = null)
 	{
-		$this->data = $data;
+		if($template)
+		{
+			if(!file_exists($template))
+				throw new InvalidArgumentException('Class ' . __METHOD__ . ' required real path to template. Template "'.$template.'" not found');
+			$this->template = (string)$template;
+		}
+		else
+			$this->template = __DIR__ . '/Templates/default.latte';
+	}
+
+	/**
+	 * @param array $events
+	 */
+	public function setEvents(array $events = array())
+	{
+		$this->events = $events;
 	}
 
 	/**
@@ -27,8 +50,9 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory
 	 */
 	public function create()
 	{
-		$calendar = new \Kappa\Packages\Calendar\CalendarControl;
-		$calendar->setEvents($this->data);
+		$calendar = new CalendarControl;
+		$calendar->setTemplate($this->template);
+		$calendar->setEvents($this->events);
 		return $calendar;
 	}
 }

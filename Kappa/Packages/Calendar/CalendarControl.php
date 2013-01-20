@@ -10,7 +10,7 @@ namespace Kappa\Packages\Calendar;
 class CalendarControl extends \Nette\Application\UI\Control
 {
 	/**
-	 * @var type array()
+	 * @var array
 	 */
 	private $month = array(
 	    1 => 'Leden',
@@ -28,17 +28,19 @@ class CalendarControl extends \Nette\Application\UI\Control
 	);
 	
 	/**
-	 * @var type int
+	 * @var int
 	 */
 	private $actualMonth;
 	
 	/**
-	 * @var type int
+	 * @var int
 	 */
 	private $actualYear;
+
+	private $_template;
 	
 	/**
-	 * @var type array
+	 * @var array
 	 */
 	private $data;
 
@@ -47,6 +49,22 @@ class CalendarControl extends \Nette\Application\UI\Control
 		parent::__construct();
 		$this->actualMonth = date('n');
 		$this->actualYear = date('Y');
+	}
+
+	/**
+	 * @param string $template
+	 */
+	public function setTemplate($template)
+	{
+		$this->_template = $template;
+	}
+
+	/**
+	 * @param array $data
+	 */
+	public function setEvents(array $data)
+	{
+		$this->data = $data;
 	}
 
 	/**
@@ -93,13 +111,7 @@ class CalendarControl extends \Nette\Application\UI\Control
 			$this->redirect('this');
 	}
 
-	/**
-	 * @param $data
-	 */
-	public function setEvents($data)
-	{
-		$this->data = $data;
-	}
+
 	
 	/**
 	 * @return array()
@@ -139,7 +151,7 @@ class CalendarControl extends \Nette\Application\UI\Control
 	
 	public function render()
 	{
-		$this->template->setFile(__DIR__ . '/Templates/default.latte');
+		$this->template->setFile($this->_template);
 		$this->template->monthNumber = $this->actualMonth;
 		$this->template->actualMonth = $this->month[$this->actualMonth]; 
 		$this->template->actualYear = $this->actualYear;
