@@ -139,7 +139,7 @@ class CalendarControl extends \Nette\Application\UI\Control
 	
 	public function render()
 	{
-		$this->template->setFile(LIBS_DIR . '/Calendar/Templates/Calendar.latte');
+		$this->template->setFile(__DIR__ . '/Templates/default.latte');
 		$this->template->monthNumber = $this->actualMonth;
 		$this->template->actualMonth = $this->month[$this->actualMonth]; 
 		$this->template->actualYear = $this->actualYear;
