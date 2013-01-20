@@ -43,6 +43,9 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements IC
 		$this->events = $events;
 	}
 
+	/**
+	 * @param array $blockDays
+	 */
 	public function setBlockDays(array $blockDays = array())
 	{
 		$this->blockDays = $blockDays;

@@ -86,6 +86,9 @@ class CalendarControl extends Kappa\Application\UI\Control
 		$this->events = $events;
 	}
 
+	/**
+	 * @param array $blockDays
+	 */
 	public function setBlockDays(array $blockDays = array())
 	{
 		$this->blockDays = $blockDays;
