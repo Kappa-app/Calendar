@@ -12,6 +12,10 @@ use Nette,
 
 class CalendarHelper extends Nette\Object
 {
+	/**
+	 * @param array $day
+	 * @return string
+	 */
 	public function getClass($day)
 	{
 		if(count($day) == 0)
