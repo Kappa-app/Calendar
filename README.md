@@ -50,6 +50,17 @@ or
 
 	}
 </pre>
+
+###The data structure for the method setEvents()
+<pre>
+	array(
+		'12.1.2013' => array(
+			'1:00' => true,
+			'2:00' => false
+		),
+	);
+</pre>
+
 ###Requirements:
 -
 * PHP 5.3.*
