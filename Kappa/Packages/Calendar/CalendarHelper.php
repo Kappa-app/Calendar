@@ -24,28 +24,30 @@ class CalendarHelper extends Nette\Object
 
 		if($day['date'] == date('j.n.Y', strtotime('now')))
 			return "today";
-		else
+		if($day['blocked'])
+			return "blocked";
+
+		unset($day['date']);
+		unset($day['blocked']);
+		$countTime = count($day);
+		$freeTime = 0;
+		$blockedTime = 0;
+		if($countTime > 0)
 		{
-			unset($day['date']);
-			$countTime = count($day);
-			$freeTime = 0;
-			$blockedTime = 0;
-			if($countTime > 0)
+			foreach($day as $time => $value)
 			{
-				foreach($day as $time => $value)
-				{
-					if($value)
-						$blockedTime++;
-					else
-						$freeTime++;
-				}
-				if($countTime == $freeTime )
-					return "free";
-				if($countTime == $blockedTime)
-					return "blocked";
-				if($freeTime > 0 && $blockedTime > 0)
-					return "partly";
+				if($value)
+					$blockedTime++;
+				else
+					$freeTime++;
 			}
+			if($countTime == $freeTime )
+				return "free";
+			if($countTime == $blockedTime)
+				return "busy";
+			if($freeTime > 0 && $blockedTime > 0)
+				return "partly";
 		}
+
 	}
 }
