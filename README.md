@@ -25,7 +25,7 @@ or
 3. Register Calendar factory into config file
 <pre>
 	CalendarFactory: Kappa\Packages\Calendar\CalendarFactory
-        CalendarHelper: Kappa\Packages\Calendar\CalendarHelper
+	CalendarHelper: Kappa\Packages\Calendar\CalendarHelper
 </pre>
 4. Added CalendarHelper into automatic helpers loader
 <pre>
@@ -38,7 +38,6 @@ or
 	 * @var Kappa\Packages\Calendar\CalendarFactory
 	 */
 	protected $calendarFactory;
-
 	protected function createComponentCalendar()
 	{
 		$calendar = $this->calendarFactory;
