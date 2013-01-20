@@ -7,7 +7,8 @@
 
 namespace Kappa\Packages\Calendar;
 
-use Kappa;
+use Kappa,
+	Kappa\Exceptions\LogicException\InvalidArgumentException;
 
 class CalendarControl extends Kappa\Application\UI\Control
 {
@@ -39,6 +40,9 @@ class CalendarControl extends Kappa\Application\UI\Control
 	 */
 	private $actualYear;
 
+	/**
+	 * @var string
+	 */
 	private $_template;
 	
 	/**
