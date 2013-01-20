@@ -6,27 +6,34 @@ Calendar can detect actual day (add class="today"), busy days (add class="busy")
 
 ###Settings:
 1. Added Kappa:Calendar into your project
+<pre>
 	"require":{
                 "php": ">= 5.3.0",
          	"kappa/framewrok": "dev-master",
          	"kappa/calendar": "dev-master",
          	"nette/nette": "dev-master"
          }
-
+</pre>
 2. Run [Composer](http://getcomposer.org)
+<pre>
 	$ composer install
+</pre>
 or
+<pre>
 	$ composer update
-
+</pre>
 3. Register Calendar factory into config file
+<pre>
 	CalendarFactory: Kappa\Packages\Calendar\CalendarFactory
         CalendarHelper: Kappa\Packages\Calendar\CalendarHelper
-
+</pre>
 4. Added CalendarHelper into automatic helpers loader
+<pre>
 	helpers:
 		getClass: @CalendarHelper::getClass
-
+</pre>
 5. Create component Calendar
+<pre>
 	/**
 	 * @var Kappa\Packages\Calendar\CalendarFactory
 	 */
@@ -40,7 +47,7 @@ or
 		return $calendar->create();
 
 	}
-
+</pre>
 ###Requirements:
 -
 * PHP 5.3.*
