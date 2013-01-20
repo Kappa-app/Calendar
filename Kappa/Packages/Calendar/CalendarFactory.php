@@ -19,7 +19,7 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements IC
 	/**
 	 * @var array
 	 */
-	private $events;
+	private $events = array();
 
 	/**
 	 * @param null $template
@@ -27,14 +27,7 @@ class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements IC
 	 */
 	public function setTemplate($template = null)
 	{
-		if($template)
-		{
-			if(!file_exists($template))
-				throw new InvalidArgumentException('Class ' . __METHOD__ . ' required real path to template. Template "'.$template.'" not found');
-			$this->template = (string)$template;
-		}
-		else
-			$this->template = __DIR__ . '/Templates/default.latte';
+		$this->template = (string)$template;
 	}
 
 	/**

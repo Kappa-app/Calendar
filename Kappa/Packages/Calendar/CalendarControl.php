@@ -42,7 +42,7 @@ class CalendarControl extends \Nette\Application\UI\Control
 	/**
 	 * @var array
 	 */
-	private $data;
+	private $events;
 
 	public function __construct()
 	{
@@ -52,19 +52,27 @@ class CalendarControl extends \Nette\Application\UI\Control
 	}
 
 	/**
-	 * @param string $template
+	 * @param null|string $template
+	 * @throws InvalidArgumentException
 	 */
-	public function setTemplate($template)
+	public function setTemplate($template = null)
 	{
-		$this->_template = $template;
+		if($template)
+		{
+			if(!file_exists($template))
+				throw new InvalidArgumentException('Class ' . __METHOD__ . ' required real path to template. Template "'.$template.'" not found');
+			$this->_template = (string)$template;
+		}
+		else
+			$this->_template = __DIR__ . '/Templates/default.latte';
 	}
 
 	/**
-	 * @param array $data
+	 * @param array $events
 	 */
-	public function setEvents(array $data)
+	public function setEvents(array $events = array())
 	{
-		$this->data = $data;
+		$this->events = $events;
 	}
 
 	/**
