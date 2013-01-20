@@ -36,6 +36,11 @@ or
 <pre>
 	protected $calendarFactory;
 
+	public function injectCalendarFactory(Kappa\Packages\Calendar\CalendarFactory $calendarFactory)
+	{
+		$this->calendarFactory = $calendarFactory;
+	}
+
 	protected function createComponentCalendar()
 	{
 		$calendar = $this->calendarFactory;
