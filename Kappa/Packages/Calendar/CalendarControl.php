@@ -118,21 +118,6 @@ class CalendarControl extends \Nette\Application\UI\Control
 		else
 			$this->redirect('this');
 	}
-
-
-	
-	/**
-	 * @return array()
-	 */
-	private function getEvents()
-	{
-		$events = array();
-		foreach($this->data as $result)
-		{
-			$events[] = date('j.n.Y' , strtotime($result['date']));
-		}
-		return $events;
-	}
 	
 	/**
 	 * @return array
@@ -141,13 +126,28 @@ class CalendarControl extends \Nette\Application\UI\Control
 	{
 		$calendar = array();
 		$day = 1;
+		$mktimeMonth = mktime(0, 0, 0, $this->actualMonth, 1, $this->actualYear);
 		for($y = 0; $y < 5; $y++)
 		{
 			for($i = 1; $i <= 7; $i++)
 			{
-				if($y * 7 + $i >= date('w', mktime(0, 0, 0, $this->actualMonth, 1, $this->actualYear)))
+				if($y * 7 + $i >= date('w', $mktimeMonth))
 				{
-					$calendar[$y][$i] = $day;
+					if($day <= date('t', $mktimeMonth))
+					{
+						$mktimeDay = mktime(0, 0, 0, $this->actualMonth, $day, $this->actualYear);
+						$hours['day'] = $day;
+						$today = date('j.n.Y', $mktimeDay);
+						if(array_key_exists($today, $this->events))
+							foreach($this->events[$today] as $time => $bool)
+							{
+								$hours[$time] = $bool;
+							}
+
+						$calendar[$y][$i] = $hours;
+					}
+					else
+						$calendar[$y][$i] = 0;
 					$day++;
 				}
 				else
@@ -163,7 +163,6 @@ class CalendarControl extends \Nette\Application\UI\Control
 		$this->template->monthNumber = $this->actualMonth;
 		$this->template->actualMonth = $this->month[$this->actualMonth]; 
 		$this->template->actualYear = $this->actualYear;
-		$this->template->events = $this->getEvents();
 		$this->template->calendar = $this->createCalendar();
 		$this->template->render();	
 	}
