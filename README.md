@@ -7,8 +7,8 @@ Calendar can detect actual day (add class="today"), busy days (add class="busy")
 ###Requirements:
 -
 * PHP 5.3.*
-* Kappa:Framework
-* Nette:Framework
+* [Kappa:Framework](https://github.com/Kappa-org/Framework)
+* [Nette Framework](http://nette.org)
 
 
 
