@@ -41,13 +41,10 @@ class CalendarHelper extends Nette\Object
 				else
 					$freeTime++;
 			}
-			if($countTime == $freeTime )
-				return "free";
 			if($countTime == $blockedTime)
 				return "busy";
 			if($freeTime > 0 && $blockedTime > 0)
 				return "partly";
 		}
-
 	}
 }
