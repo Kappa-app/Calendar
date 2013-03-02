@@ -1,14 +1,16 @@
 <?php
 /**
  * CalendarHelper.php
- * Autgor: Ondřej Záruba <zarubaondra@gmail.com>
- * Date: 20.1.13
+ *
+ * @author Ondřej Záruba <zarubaondra@gmail.com>
+ * @date 20.1.13
+ *
+ * @package Kappa
  */
 
 namespace Kappa\Packages\Calendar;
 
-use Nette,
-	Kappa\Exceptions\LogicException\InvalidArgumentException;
+use Nette;
 
 class CalendarHelper extends Nette\Object
 {

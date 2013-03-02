@@ -1,34 +1,30 @@
 <?php
 /**
  * CalendarFactory.php
- * Autgor: Ondřej Záruba <zarubaondra@gmail.com>
- * Date: 2.11.12
+ *
+ * @author Ondřej Záruba <zarubaondra@gmail.com>
+ * @date 2.11.12
+ *
+ * @package Kappa
  */
 
 namespace Kappa\Packages\Calendar;
 
-use Kappa\Exceptions\LogicException\InvalidArgumentException;
+use Kappa;
 
-class CalendarFactory extends \Kappa\Application\UI\ControlFactory implements ICalendarFactory
+class CalendarFactory extends Kappa\Application\UI\ControlFactory implements ICalendarFactory
 {
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $template;
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $events = array();
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $blockDays = array();
 
 	/**
 	 * @param null $template
-	 * @throws \Kappa\Exceptions\LogicException\InvalidArgumentException
 	 */
 	public function setTemplate($template = null)
 	{

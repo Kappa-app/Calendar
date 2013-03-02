@@ -1,20 +1,20 @@
 <?php
 /**
  * CalendarControl.php
- * Autgor: Ondřej Záruba <zarubaondra@gmail.com>
- * Date: 2.11.12
+ *
+ * @author Ondřej Záruba <zarubaondra@gmail.com>
+ * @date 2.11.12
+ *
+ * @package Kappa
  */
 
 namespace Kappa\Packages\Calendar;
 
-use Kappa,
-	Kappa\Exceptions\LogicException\InvalidArgumentException;
+use Kappa;
 
 class CalendarControl extends Kappa\Application\UI\Control
 {
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $month = array(
 	    1 => 'Leden',
 	    2 => 'Únor',
@@ -30,48 +30,38 @@ class CalendarControl extends Kappa\Application\UI\Control
 	    12 => 'Prosinec',
 	);
 	
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	private $actualMonth;
 	
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	private $actualYear;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $_template;
 	
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $events;
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $blockDays;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->actualMonth = date('n');
-		$this->actualYear = date('Y');
+		$this->actualMonth = (int)date('n');
+		$this->actualYear = (int)date('Y');
 	}
 
 	/**
-	 * @param null|string $template
-	 * @throws InvalidArgumentException
+	 * @param null $template
+	 * @throws \Kappa\FileNotFoundException
 	 */
 	public function setTemplate($template = null)
 	{
 		if($template)
 		{
 			if(!file_exists($template))
-				throw new InvalidArgumentException('Class ' . __METHOD__ . ' required real path to template. Template "'.$template.'" not found');
+				throw new \Kappa\FileNotFoundException(__METHOD__, $template);
 			$this->_template = (string)$template;
 		}
 		else
