@@ -21,7 +21,7 @@
 		"kappa/framework": "dev-master"
 	},
 	"require-dev": {
-		"nette/tester": "dev-master"
+		"kappa/tester": "1.0.*"
 	},
 	"autoload": {
 		"psr-0": {
