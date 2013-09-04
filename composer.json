@@ -1,37 +1,31 @@
 {
-	"name":"kappa/calendar",
-	"type":"library",
-	"description":"Easy system for work with events and can by used as core for booking system.",
-	"keywords":["framework", "Nette", "Kappa", "calendar", "booking"],
-	"homepage":"https://github.com/Kappa-org/Calendar",
-	"license":"",
-	"minimum-stability":"dev",
-
-	"authors":[
+	"name": "kappa/calendar",
+	"description": "Easy system for work with events and can by used as core for booking system.",
+	"keywords": ["framework", "Nette", "Kappa", "calendar", "booking"],
+	"homepage": "https://github.com/Kappa-org/Calendar",
+	"license": "",
+	"type": "library",
+	"authors": [
 		{
-			"name":"Ondřej Záruba",
-			"homepage":"http://zaruba-ondrej.cz/"
+			"name": "Ondřej Záruba",
+			"homepage": "http://zaruba-ondrej.cz/"
 		}
 	],
-
-	"support":{
-		"email":"zarubaondra@gmail.com",
-		"issues":"https://github.com/Kappa-org/Calendar/issues"
+	"support": {
+		"email": "zarubaondra@gmail.com",
+		"issues": "https://github.com/Kappa-org/Calendar/issues"
 	},
-
-	"require":{
-		"php":">= 5.3.0",
-		"nette/nette":"dev-master",
-		"kappa/framework":"dev-master"
+	"require": {
+		"php": ">= 5.3.0",
+		"nette/nette": "dev-master",
+		"kappa/framework": "dev-master"
 	},
-
-	"require-dev":{
-		"nette/tester":"dev-master"
+	"require-dev": {
+		"nette/tester": "dev-master"
 	},
-
-	"autoload":{
-		"psr-0":{
-			"Kappa":"./"
+	"autoload": {
+		"psr-0": {
+			"Kappa": "./"
 		}
 	}
 }
