@@ -8,7 +8,7 @@
  * @package Kappa
  */
 
-namespace Kappa\Packages\Calendar;
+namespace Kappa\Calendar;
 
 use Kappa;
 
