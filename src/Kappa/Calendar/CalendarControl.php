@@ -26,12 +26,6 @@ class CalendarControl extends Control
 	/** @var string */
 	private $_template;
 
-	/** @var array */
-	private $events;
-
-	/** @var array */
-	private $blockDays;
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -50,22 +44,6 @@ class CalendarControl extends Control
 			$this->_template = (string)$template;
 		} else
 			$this->_template = __DIR__ . '/Templates/default.latte';
-	}
-
-	/**
-	 * @param array $events
-	 */
-	public function setEvents(array $events = array())
-	{
-		$this->events = $events;
-	}
-
-	/**
-	 * @param array $blockDays
-	 */
-	public function setBlockDays(array $blockDays = array())
-	{
-		$this->blockDays = $blockDays;
 	}
 
 	/**
