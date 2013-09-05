@@ -12,6 +12,7 @@ namespace Kappa\Calendar;
 
 use Nette\Application\UI\Control;
 use Nette\DateTime;
+use Nette\Diagnostics\Debugger;
 
 /**
  * Class CalendarControl
@@ -24,7 +25,7 @@ class CalendarControl extends Control
 
 	/** @var string */
 	private $_template;
-	
+
 	/** @var array */
 	private $events;
 
@@ -43,13 +44,11 @@ class CalendarControl extends Control
 	 */
 	public function setTemplate($template = null)
 	{
-		if($template)
-		{
-			if(!file_exists($template))
+		if ($template) {
+			if (!file_exists($template))
 				throw new \Kappa\FileNotFoundException(__METHOD__, $template);
 			$this->_template = (string)$template;
-		}
-		else
+		} else
 			$this->_template = __DIR__ . '/Templates/default.latte';
 	}
 
@@ -76,7 +75,7 @@ class CalendarControl extends Control
 	{
 		$date = new DateTime($date);
 		$this->date = $date->modify('-1 month');
-		if($this->presenter->isAjax())
+		if ($this->presenter->isAjax())
 			$this->invalidateControl('calendar');
 		else
 			$this->redirect('this');
@@ -89,12 +88,12 @@ class CalendarControl extends Control
 	{
 		$date = new DateTime($date);
 		$this->date = $date->modify('+1 month');
-		if($this->presenter->isAjax())
+		if ($this->presenter->isAjax())
 			$this->invalidateControl('calendar');
 		else
 			$this->redirect('this');
 	}
-	
+
 	/**
 	 * @return array
 	 */
@@ -102,52 +101,36 @@ class CalendarControl extends Control
 	{
 		$calendar = array();
 		$day = 1;
-		$mktimeMonth = $this->date->getTimestamp();
-		for($y = 0; $y < 5; $y++)
-		{
-			for($i = 1; $i <= 7; $i++)
-			{
-				if($y * 7 + $i >= date('w', $mktimeMonth))
-				{
-					if($day <= date('t', $mktimeMonth))
-					{
-						$date = $this->date;
-						$mktimeDay = $date->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
-						$contain['day'] = $day;
-						$today = $mktimeDay->format('j.n.Y');
-						$contain['date'] = $today;
-						if(in_array($today, $this->blockDays) || in_array($this->date->format('D'), $this->blockDays))
-							$contain['blocked'] = true;
-						else
-							$contain['blocked'] = false;
-						if(array_key_exists($today, $this->events))
-						{
-
-							foreach($this->events[$today] as $time => $bool)
-							{
-								$contain[$time] = $bool;
-							}
-
-						}
-						$calendar[$y][$i] = $contain;
-						$contain = array();
+		$date = $this->date;
+		for ($i = 0; $i <= 5; $i++) {
+			for ($y = 1; $y <= 7; $y++) {
+				$firstDay = $date->setDate($this->date->format('Y'), $this->date->format('m'), 1)
+					->format('N');
+				if ($i * 7 + $y >= $firstDay) {
+					if ($day <= $this->date->format('t')) {
+						$dayDate = "{$this->date->format('Y')}-{$this->date->format('m')}-{$day}";
+						$calendar[$i][$y] = array(
+							'day' => $day,
+							'date' => new DateTime($dayDate),
+						);
+						$day++;
+					} else {
+						$calendar[$i][$y] = array();
 					}
-					else
-						$calendar[$y][$i] = array();
-					$day++;
+				} else {
+					$calendar[$i][$y] = array();
 				}
-				else
-					$calendar[$y][$i] = array();
 			}
 		}
+
 		return $calendar;
 	}
-	
+
 	public function render()
 	{
 		$this->template->setFile($this->_template);
 		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
-		$this->template->render();	
+		$this->template->render();
 	}
 }
