@@ -148,7 +148,6 @@ class CalendarControl extends Control
 		$this->template->setFile($this->_template);
 		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
-		$this->template->calendarHelper = new CalendarHelper;
 		$this->template->render();	
 	}
 }
