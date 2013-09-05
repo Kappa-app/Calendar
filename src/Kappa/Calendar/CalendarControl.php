@@ -1,40 +1,26 @@
 <?php
 /**
- * CalendarControl.php
+ * This file is part of the Kappa/Calendar package.
  *
- * @author Ondřej Záruba <zarubaondra@gmail.com>
- * @date 2.11.12
+ * (c) Ondřej Záruba <zarubaondra@gmail.com>
  *
- * @package Kappa
+ * For the full copyright and license information, please view the license.md
+ * file that was distributed with this source code.
  */
 
 namespace Kappa\Calendar;
 
 use Nette\Application\UI\Control;
+use Nette\DateTime;
 
+/**
+ * Class CalendarControl
+ * @package Kappa\Calendar
+ */
 class CalendarControl extends Control
 {
-	/** @var array */
-	private $month = array(
-	    1 => 'Leden',
-	    2 => 'Únor',
-	    3 => 'Březen',
-	    4 => 'Duben',
-	    5 => 'Květen',
-	    6 => 'Červen',
-	    7 => 'Červenec',
-	    8 => 'Srpen',
-	    9 => 'Září',
-	    10 => 'Říjen',
-	    11 => 'Listopad',
-	    12 => 'Prosinec',
-	);
-	
-	/** @var int */
-	private $actualMonth;
-	
-	/** @var int */
-	private $actualYear;
+	/** @var \Nette\DateTime */
+	private $date;
 
 	/** @var string */
 	private $_template;
@@ -48,8 +34,7 @@ class CalendarControl extends Control
 	public function __construct()
 	{
 		parent::__construct();
-		$this->actualMonth = (int)date('n');
-		$this->actualYear = (int)date('Y');
+		$this->date = new DateTime();
 	}
 
 	/**
@@ -85,43 +70,25 @@ class CalendarControl extends Control
 	}
 
 	/**
-	 * @param int $month
-	 * @param int $year
+	 * @param string $date
 	 */
-	public function handlePrevMonth($month, $year)
+	public function handlePrevMonth($date)
 	{
-		if($month - 1 == 0)
-		{
-			$this->actualMonth = 12;
-			$this->actualYear = $year - 1;
-		}
-		else
-		{
-			$this->actualMonth = $month - 1;
-			$this->actualYear = $year;
-		}
+		$date = new DateTime($date);
+		$this->date = $date->modify('-1 month');
 		if($this->presenter->isAjax())
 			$this->invalidateControl('calendar');
 		else
 			$this->redirect('this');
 	}
-	
+
 	/**
-	 * @param int $month
-	 * @param int $year
+	 * @param string $date
 	 */
-	public function handleNextMonth($month, $year)
+	public function handleNextMonth($date)
 	{
-		if($month  == 12)
-		{
-			$this->actualMonth = 1;
-			$this->actualYear = $year + 1;
-		}
-		else
-		{
-			$this->actualMonth = $month + 1;
-			$this->actualYear = $year;
-		}
+		$date = new DateTime($date);
+		$this->date = $date->modify('+1 month');
 		if($this->presenter->isAjax())
 			$this->invalidateControl('calendar');
 		else
@@ -135,7 +102,7 @@ class CalendarControl extends Control
 	{
 		$calendar = array();
 		$day = 1;
-		$mktimeMonth = mktime(0, 0, 0, $this->actualMonth, 1, $this->actualYear);
+		$mktimeMonth = $this->date->getTimestamp();
 		for($y = 0; $y < 5; $y++)
 		{
 			for($i = 1; $i <= 7; $i++)
@@ -144,11 +111,12 @@ class CalendarControl extends Control
 				{
 					if($day <= date('t', $mktimeMonth))
 					{
-						$mktimeDay = mktime(0, 0, 0, $this->actualMonth, $day, $this->actualYear);
+						$date = $this->date;
+						$mktimeDay = $date->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
 						$contain['day'] = $day;
-						$today = date('j.n.Y', $mktimeDay);
+						$today = $mktimeDay->format('j.n.Y');
 						$contain['date'] = $today;
-						if(in_array($today, $this->blockDays) || in_array(date('D', $mktimeDay), $this->blockDays))
+						if(in_array($today, $this->blockDays) || in_array($this->date->format('D'), $this->blockDays))
 							$contain['blocked'] = true;
 						else
 							$contain['blocked'] = false;
@@ -178,9 +146,7 @@ class CalendarControl extends Control
 	public function render()
 	{
 		$this->template->setFile($this->_template);
-		$this->template->monthNumber = $this->actualMonth;
-		$this->template->actualMonth = $this->month[$this->actualMonth]; 
-		$this->template->actualYear = $this->actualYear;
+		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
 		$this->template->calendarHelper = new CalendarHelper;
 		$this->template->render();	

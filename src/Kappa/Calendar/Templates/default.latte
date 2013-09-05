@@ -3,9 +3,9 @@
 		<table border="0">
 			<thead>
 				<tr>
-					<td colspan="2"><a n:href="PrevMonth $monthNumber, $actualYear" class="ajax"><<</a></td>
-					<td colspan="3">{$actualMonth} {$actualYear}</td>
-					<td colspan="2"><a n:href="NextMonth $monthNumber, $actualYear" class="ajax">>></a></td>
+					<td colspan="2"><a n:href="PrevMonth! $date->format('d.m.Y')" class="ajax"><<</a></td>
+					<td colspan="3">{*$actualMonth} {$actualYear*}{$date->format('F Y')}</td>
+					<td colspan="2"><a n:href="NextMonth! $date->format('d.m.Y')" class="ajax">>></a></td>
 				</tr>
 				<tr>
 					<td>PO</td>
