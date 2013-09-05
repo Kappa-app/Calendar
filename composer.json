@@ -26,6 +26,9 @@
 	"autoload": {
 		"psr-0": {
 			"Kappa": "src/"
-		}
+		},
+		"classmap": [
+			"src/Kappa/Calendarg/exceptions.php"
+		]
 	}
 }

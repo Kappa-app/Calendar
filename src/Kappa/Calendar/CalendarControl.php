@@ -33,17 +33,19 @@ class CalendarControl extends Control
 	}
 
 	/**
-	 * @param null $template
-	 * @throws \Kappa\FileNotFoundException
+	 * @param string|null $template
+	 * @throws TemplateNotFoundException
 	 */
 	public function setTemplate($template = null)
 	{
-		if ($template) {
-			if (!file_exists($template))
-				throw new \Kappa\FileNotFoundException(__METHOD__, $template);
-			$this->_template = (string)$template;
-		} else
+		if ($template !== null) {
+			if (!is_file($template)) {
+				throw new TemplateNotFoundException("Template {$template} has not been found");
+			}
+			$this->_template = $template;
+		} else {
 			$this->_template = __DIR__ . '/Templates/default.latte';
+		}
 	}
 
 	/**
