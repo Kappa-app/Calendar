@@ -24,7 +24,7 @@ class CalendarControl extends Control
 	private $date;
 
 	/** @var string */
-	private $_template;
+	private $fileTemplate;
 
 	public function __construct()
 	{
@@ -42,9 +42,9 @@ class CalendarControl extends Control
 			if (!is_file($template)) {
 				throw new TemplateNotFoundException("Template {$template} has not been found");
 			}
-			$this->_template = $template;
+			$this->fileTemplate = $template;
 		} else {
-			$this->_template = __DIR__ . '/Templates/default.latte';
+			$this->fileTemplate = __DIR__ . '/Templates/default.latte';
 		}
 	}
 
@@ -108,7 +108,7 @@ class CalendarControl extends Control
 
 	public function render()
 	{
-		$this->template->setFile($this->_template);
+		$this->template->setFile($this->fileTemplate);
 		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
 		$this->template->render();
