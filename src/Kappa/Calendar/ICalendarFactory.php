@@ -1,15 +1,19 @@
 <?php
 /**
- * ICalendarFactory.php
+ * This file is part of the Kappa/Console package.
  *
- * @author Ondřej Záruba <zarubaondra@gmail.com>
- * @date 20.1.13
+ * (c) Ondřej Záruba <zarubaondra@gmail.com>
  *
- * @package Kappa
+ * For the full copyright and license information, please view the license.md
+ * file that was distributed with this source code.
  */
 
 namespace Kappa\Calendar;
 
+/**
+ * Class ICalendarFactory
+ * @package Kappa\Calendar
+ */
 interface ICalendarFactory
 {
 	/**
