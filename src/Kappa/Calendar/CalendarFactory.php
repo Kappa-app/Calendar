@@ -36,6 +36,7 @@ class CalendarFactory implements ICalendarFactory
 	{
 		$calendar = new CalendarControl;
 		$calendar->setTemplate($this->template);
+
 		return $calendar;
 	}
 }
