@@ -12,7 +12,7 @@ namespace Kappa\Calendar;
 
 use Kappa;
 
-class CalendarFactory extends Kappa\Application\UI\ControlFactory implements ICalendarFactory
+class CalendarFactory implements ICalendarFactory
 {
 	/** @var string */
 	private $template;
