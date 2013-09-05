@@ -10,9 +10,9 @@
 
 namespace Kappa\Calendar;
 
-use Kappa;
+use Nette\Application\UI\Control;
 
-class CalendarControl extends Kappa\Application\UI\Control
+class CalendarControl extends Control
 {
 	/** @var array */
 	private $month = array(
