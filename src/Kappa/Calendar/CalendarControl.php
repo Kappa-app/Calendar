@@ -12,7 +12,6 @@ namespace Kappa\Calendar;
 
 use Nette\Application\UI\Control;
 use Nette\DateTime;
-use Nette\Diagnostics\Debugger;
 
 /**
  * Class CalendarControl
@@ -55,10 +54,11 @@ class CalendarControl extends Control
 	{
 		$date = new DateTime($date);
 		$this->date = $date->modify('-1 month');
-		if ($this->presenter->isAjax())
+		if ($this->presenter->isAjax()) {
 			$this->invalidateControl('calendar');
-		else
+		} else {
 			$this->redirect('this');
+		}
 	}
 
 	/**
@@ -68,10 +68,11 @@ class CalendarControl extends Control
 	{
 		$date = new DateTime($date);
 		$this->date = $date->modify('+1 month');
-		if ($this->presenter->isAjax())
+		if ($this->presenter->isAjax()) {
 			$this->invalidateControl('calendar');
-		else
+		} else {
 			$this->redirect('this');
+		}
 	}
 
 	/**
