@@ -23,7 +23,7 @@ services:
 ```
 
 and use nette.ajax.js
-```js
+```javascript
 $.nette.init()
 ```
 
