@@ -99,7 +99,7 @@ class CalendarControl extends Control
 						$dayDate = "{$this->date->format('Y')}-{$this->date->format('m')}-{$day}";
 						$calendar[$i][$y] = array(
 							'day' => $day,
-							'date' => new DateTime($dayDate),
+							'datetime' => new DateTime($dayDate),
 						);
 						$day++;
 					} else {
