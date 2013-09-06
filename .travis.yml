@@ -1,0 +1,12 @@
+language: php
+
+php:
+        - "5.3.3"
+        - "5.4"
+
+script: "VERBOSE=true ./vendor/bin/tester -s -j 4 tests/"
+
+before_script:
+        - composer self-update
+        - composer install --dev
+        - sudo chmod 777 -R ./
