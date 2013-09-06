@@ -22,11 +22,11 @@ class CalendarFactory implements ICalendarFactory
 	private $template;
 
 	/**
-	 * @param null $template
+	 * @param string|null $template
 	 */
 	public function setTemplate($template = null)
 	{
-		$this->template = (string)$template;
+		$this->template = $template;
 	}
 
 	/**
