@@ -19,7 +19,7 @@
 			</thead>
 			<tbody>
 				<tr n:foreach="$calendar as $row">
-					<td n:foreach="$row as $dayNumber => $day">
+					<td n:foreach="$row as $dayNumber => $day"{if $manager->isActualDay($day)} class="active"{/if}>
 						{if count($day) !== 0}
 							{$day['day']}
 						{/if}

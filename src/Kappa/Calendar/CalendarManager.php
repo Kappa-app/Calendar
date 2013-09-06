@@ -10,6 +10,7 @@
 
 namespace Kappa\Calendar;
 
+use Nette\DateTime;
 use Nette\Object;
 
 /**
@@ -18,5 +19,18 @@ use Nette\Object;
  */
 class CalendarManager extends Object
 {
-	
+	/**
+	 * @param array $day
+	 * @return bool
+	 */
+	public function isActualDay(array $day)
+	{
+		$actualDate = new DateTime();
+		$actualDate->setTime(0, 0, 0);
+		if (isset($day['datetime']) && $day['datetime'] == $actualDate) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
