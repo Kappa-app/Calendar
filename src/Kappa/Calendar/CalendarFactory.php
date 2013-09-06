@@ -25,11 +25,15 @@ class CalendarFactory implements ICalendarFactory
 	private $manager;
 
 	/**
-	 * @param string $template
+	 * @param null|string $template
+	 * @throws TemplateNotFoundException
 	 */
 	public function setTemplate($template)
 	{
-		$this->template = $template;
+			if (!is_file($template)) {
+				throw new TemplateNotFoundException("Template {$template} has not been found");
+			}
+			$this->template = $template;
 	}
 
 	/**

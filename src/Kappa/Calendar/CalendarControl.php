@@ -39,19 +39,12 @@ class CalendarControl extends Control
 	}
 
 	/**
-	 * @param string|null $template
+	 * @param string $template
 	 * @throws TemplateNotFoundException
 	 */
-	public function setTemplate($template = null)
+	public function setTemplate($template)
 	{
-		if ($template !== null) {
-			if (!is_file($template)) {
-				throw new TemplateNotFoundException("Template {$template} has not been found");
-			}
-			$this->fileTemplate = $template;
-		} else {
-			$this->fileTemplate = __DIR__ . '/Templates/default.latte';
-		}
+		$this->fileTemplate = $template;
 	}
 
 	/**
@@ -116,7 +109,7 @@ class CalendarControl extends Control
 
 	public function render()
 	{
-		$this->template->setFile($this->fileTemplate);
+		$this->template->setFile($this->fileTemplate ? :  __DIR__ . '/Templates/default.latte');
 		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
 		$this->template->manager = $this->manager;
