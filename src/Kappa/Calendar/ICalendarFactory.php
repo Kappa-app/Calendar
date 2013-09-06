@@ -20,4 +20,16 @@ interface ICalendarFactory
 	 * @return CalendarControl
 	 */
 	public function create();
+
+	/**
+	 * @param string|null $template
+	 * @return void
+	 */
+	public function setTemplate($template = null);
+
+	/**
+	 * @param object|null $manager
+	 * @return void
+	 */
+	public function setManager($manager = null);
 }
