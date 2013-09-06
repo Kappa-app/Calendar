@@ -25,10 +25,17 @@ class CalendarControl extends Control
 	/** @var string */
 	private $fileTemplate;
 
-	public function __construct()
+	/** @var object */
+	private $manager;
+
+	/**
+	 * @param object|null $manager
+	 */
+	public function __construct($manager = null)
 	{
 		parent::__construct();
 		$this->date = new DateTime();
+		$this->manager = $manager;
 	}
 
 	/**
@@ -112,6 +119,7 @@ class CalendarControl extends Control
 		$this->template->setFile($this->fileTemplate);
 		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
+		$this->template->manager = $this->manager;
 		$this->template->render();
 	}
 }

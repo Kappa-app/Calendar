@@ -21,6 +21,9 @@ class CalendarFactory implements ICalendarFactory
 	/** @var string */
 	private $template;
 
+	/** @var object */
+	private $manager;
+
 	/**
 	 * @param string|null $template
 	 */
@@ -30,11 +33,19 @@ class CalendarFactory implements ICalendarFactory
 	}
 
 	/**
+	 * @param object $manager
+	 */
+	public function setManager($manager = null)
+	{
+		$this->manager = $manager;
+	}
+
+	/**
 	 * @return CalendarControl
 	 */
 	public function create()
 	{
-		$calendar = new CalendarControl;
+		$calendar = new CalendarControl($this->manager);
 		$calendar->setTemplate($this->template);
 
 		return $calendar;
