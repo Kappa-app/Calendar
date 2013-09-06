@@ -7,6 +7,7 @@ Component for generation calendar prepared for next work with it
 * PHP 5.3 or higher
 * [Composer](http://getcomposer.org/)
 * [Nette Framework](http://nette.org)
+* [nette.ajax.js](https://github.com/vojtech-dobes/nette.ajax.js/)
 
 ##Installation
 The best way to install Kappa/FileSystem is using Composer:
@@ -21,6 +22,12 @@ services:
 	- Kappa\Calendar\CalendarFactory
 ```
 
+and use nette.ajax.js
+```js
+$.nette.init()
+```
+
+###Usages
 and next add component into presenter
 
 ```php
