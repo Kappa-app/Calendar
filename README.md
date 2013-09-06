@@ -1,101 +1,108 @@
-#Calendar
--
+#Kappa/Calendar
 
-Easy system for work with events and can by used as core for booking system.
-Calendar can detect actual day (add class="today"), busy days (add class="busy") and free days (add class="free").
+##Requirements:
 
-###Settings:
-1. Added Kappa:Calendar into your project
-<pre>
-	"require":{
-		"php": ">= 5.3.0",
-		"kappa/framewrok": "dev-master",
-		"kappa/calendar": "dev-master",
-		"nette/nette": "dev-master"
-         }
-</pre>
-2. Run [Composer](http://getcomposer.org)
-<pre>
-	$ composer install
-</pre>
-or
-<pre>
-	$ composer update
-</pre>
-3. Register Calendar factory into config file
-<pre>
-	CalendarFactory: Kappa\Packages\Calendar\CalendarFactory
-	CalendarHelper: Kappa\Packages\Calendar\CalendarHelper
-</pre>
-4. Added CalendarHelper into automatic helpers loader
-<pre>
-	helpers:
-		getClass: @CalendarHelper::getClass
-</pre>
-5. Create component Calendar
-<pre>
-	protected $calendarFactory;
-
-	public function injectCalendarFactory(Kappa\Packages\Calendar\CalendarFactory $calendarFactory)
-	{
-		$this->calendarFactory = $calendarFactory;
-	}
-
-	protected function createComponentCalendar()
-	{
-		$calendar = $this->calendarFactory;
-		$calendar->setEvents($events); // unrequired
-		$calendar->setTemplate($yourTemplate); // unrequired
-		return $calendar->create();
-
-	}
-</pre>
-
-###Configuration
-When you create component you can use three method for add setting for calendar
-<pre>
-	$caledarFactory->setEvets(/* array */);
-	$caledarFactory->setBlockDays(/* array */);
-	$caledarFactory->setTemplate(/* string - path to file */);
-</pre>
-
-####setEvents()
-<pre>
-	$events = array(
-		'12.1.2013' => array(
-			'1:00' => true,
-			'2:00' => false
-			),
-		);
-	$calendarFactory->setEvents($events);
-
-</pre>
-
-####setBlockDays()
-Allowable entries:
-
-1. A textual representation of a day, three letters (example "Mon") // Every Monday will be blocked
-
-2. Date (example "1.1.2013") // Date 1.1.2013 will be blocked
-
-<pre>
-	$blockDays = array('Mon', '1.1.2013'); // Every Monday and 1.1.2013
-	$calendarFactory->setBlockDays($blockDays);
-</pre>
-
-####setTemplate()
-<pre>
-	$template = __DIR__ . '/../templates/components/calendar.latte';
-	$calendarFactory->setTemplate($template);
- </pre>
-
-###Requirements:
--
-* PHP 5.3.*
-* [Kappa:Framework](https://github.com/Kappa-org/Framework)
+* PHP 5.3 or higher
+* [Composer](http://getcomposer.org/)
 * [Nette Framework](http://nette.org)
 
+##Installation
+The best way to install Kappa/FileSystem is using Composer:
+```bash
+$ composer require kappa/filesystem:@dev
+```
 
+Register Kappa\Calendar\CalendarFactory class
 
+```yaml
+services:
+	- Kappa\Calendar\CalendarFactory
+```
+
+and next add component into presenter
+
+```php
+/**
+ * @inject
+ * @var \Kappa\Calendar\ICalendarFactory
+ */
+public $calendarFactory;
+
+/**
+ * @return \Kappa\Calendar\CalendarControl
+ */
+protected function createComponentCalendar()
+{
+	return $this->calendarFactory->create();
+}
+```
+
+you can add custom template with
+```php
+/**
+ * @return \Kappa\Calendar\CalendarControl
+ */
+protected function createComponentCalendar()
+{
+	$calendar = $this->calendarFactory;
+	$calendar->setTemplate(/* path to template */);
+	return $calendar->create();
+}
+```
+
+and you can add manager for work with day with
+```php
+/**
+ * @return \Kappa\Calendar\CalendarControl
+ */
+protected function createComponentCalendar()
+{
+	$calendar = $this->calendarFactory;
+	$calendar->setManager(new MyCalendarManager);
+	return $calendar->create();
+}
+```
+and your manager you can use with ```$manager``` variable in template
+
+## Examples:
+
+**Presenter**
+```php
+/**
+ * @inject
+ * @var \Kappa\Calendar\ICalendarFactory
+ */
+public $calendarFactory;
+
+/**
+ * @inject
+ * @var \Kappa\Calendar\CalendarManager
+ */
+public $calendarManager;
+
+/**
+ * @return \Kappa\Calendar\CalendarControl
+ */
+protected function createComponentCalendar()
+{
+	$calendar = $this->calendarFactory;
+	$calendar->setTemplate(__DIR__ . '/../templates/components/calendar.latte');
+	$calendar->setManager($this->calendarManager);
+	return $calendar->create();
+}
+```
+
+**Tempalte**
+```html
+<tr n:foreach="$calendar as $row">
+	<td n:foreach="$row as $dayNumber => $day"{if $manager->isActualDay($day)} class="active"{/if}>
+		{if count($day) !== 0}
+			{$day['day']}
+		{/if}
+	</td>
+</tr>
+```
+
+Variable $manager contain default manager with method for check actual day
 
 
