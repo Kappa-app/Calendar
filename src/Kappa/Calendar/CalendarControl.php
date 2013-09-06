@@ -96,7 +96,7 @@ class CalendarControl extends Control
 					->format('N');
 				if ($i * 7 + $y >= $firstDay) {
 					if ($day <= $this->date->format('t')) {
-						$dayDate = "{$this->date->format('Y')}-{$this->date->format('m')}-{$day}";
+						$dayDate = "{$this->date->format('Y')}-{$this->date->format('m')}-{$day} 00:00:00";
 						$calendar[$i][$y] = array(
 							'day' => $day,
 							'datetime' => new DateTime($dayDate),
