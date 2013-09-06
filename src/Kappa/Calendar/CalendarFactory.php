@@ -21,21 +21,21 @@ class CalendarFactory implements ICalendarFactory
 	/** @var string */
 	private $template;
 
-	/** @var object */
+	/** @var mixed */
 	private $manager;
 
 	/**
-	 * @param string|null $template
+	 * @param string $template
 	 */
-	public function setTemplate($template = null)
+	public function setTemplate($template)
 	{
 		$this->template = $template;
 	}
 
 	/**
-	 * @param object $manager
+	 * @param mixed $manager
 	 */
-	public function setManager($manager = null)
+	public function setManager($manager)
 	{
 		$this->manager = $manager;
 	}

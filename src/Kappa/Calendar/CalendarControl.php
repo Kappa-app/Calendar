@@ -25,11 +25,11 @@ class CalendarControl extends Control
 	/** @var string */
 	private $fileTemplate;
 
-	/** @var object */
+	/** @var mixed|null */
 	private $manager;
 
 	/**
-	 * @param object|null $manager
+	 * @param mixed|null $manager
 	 */
 	public function __construct($manager = null)
 	{

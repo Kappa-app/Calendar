@@ -25,11 +25,11 @@ interface ICalendarFactory
 	 * @param string|null $template
 	 * @return void
 	 */
-	public function setTemplate($template = null);
+	public function setTemplate($template);
 
 	/**
-	 * @param object|null $manager
+	 * @param mixed|null $manager
 	 * @return void
 	 */
-	public function setManager($manager = null);
+	public function setManager($manager);
 }
