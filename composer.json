@@ -27,7 +27,7 @@
 			"Kappa": "src/"
 		},
 		"classmap": [
-			"src/Kappa/Calendarg/exceptions.php"
+			"src/Kappa/Calendar/exceptions.php"
 		]
 	}
 }
