@@ -1,31 +1,29 @@
-{snippet calendar}
-	<div>
-		<table border="0">
-			<thead>
-				<tr>
-					<td colspan="2"><a n:href="PrevMonth! $date->format('d.m.Y')" class="ajax"><<</a></td>
-					<td colspan="3">{*$actualMonth} {$actualYear*}{$date->format('F Y')}</td>
-					<td colspan="2"><a n:href="NextMonth! $date->format('d.m.Y')" class="ajax">>></a></td>
-				</tr>
-				<tr>
-					<td>PO</td>
-					<td>ÚT</td>
-					<td>ST</td>
-					<td>ČT</td>
-					<td>PÁ</td>
-					<td>SO</td>
-					<td>NE</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr n:foreach="$calendar as $row">
-					<td n:foreach="$row as $dayNumber => $day"{if $manager->isActualDay($day)} class="active"{/if}>
-						{if count($day) !== 0}
-							{$day['day']}
-						{/if}
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-{/snippet}
+<div n:snippet="calendar">
+	<table border="0">
+		<thead>
+		<tr>
+			<td colspan="2"><a n:href="PrevMonth! $date->format('d.m.Y')" class="ajax"><<</a></td>
+			<td colspan="3">{*$actualMonth} {$actualYear*}{$date->format('F Y')}</td>
+			<td colspan="2"><a n:href="NextMonth! $date->format('d.m.Y')" class="ajax">>></a></td>
+		</tr>
+		<tr>
+			<td>PO</td>
+			<td>ÚT</td>
+			<td>ST</td>
+			<td>ČT</td>
+			<td>PÁ</td>
+			<td>SO</td>
+			<td>NE</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr n:foreach="$calendar as $row">
+			<td n:foreach="$row as $dayNumber => $day"{if $manager->isActualDay($day)} class="active"{/if}>
+				{if count($day) !== 0}
+					{$day['day']}
+				{/if}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
