@@ -1,5 +1,7 @@
 #Kappa/Calendar
 
+Component for generation calendar prepared for next work with it
+
 ##Requirements:
 
 * PHP 5.3 or higher

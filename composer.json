@@ -1,7 +1,7 @@
 {
 	"name": "kappa/calendar",
-	"description": "Easy system for work with events and can by used as core for booking system.",
-	"keywords": ["framework", "Nette", "Kappa", "calendar", "booking"],
+	"description": "Component for generation calendar prepared for next work with it",
+	"keywords": ["framework", "Nette", "Kappa", "calendar"],
 	"homepage": "https://github.com/Kappa-org/Calendar",
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"type": "library",
