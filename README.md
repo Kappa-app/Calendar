@@ -1,4 +1,4 @@
-#Kappa/Calendar
+#Kappa/Calendar [![Build Status](https://travis-ci.org/Kappa-org/Calendar.png?branch=master)](https://travis-ci.org/Kappa-org/Calendar)
 
 Component for generation calendar prepared for next work with it
 
