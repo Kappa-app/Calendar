@@ -50,7 +50,7 @@ class CalendarControl extends Control
 	/**
 	 * @param string $date
 	 */
-	public function handlePrevMonth($date)
+	public function handlePrev($date)
 	{
 		$date = new DateTime($date);
 		$this->date = $date->modify('-1 month');
@@ -64,7 +64,7 @@ class CalendarControl extends Control
 	/**
 	 * @param string $date
 	 */
-	public function handleNextMonth($date)
+	public function handleNext($date)
 	{
 		$date = new DateTime($date);
 		$this->date = $date->modify('+1 month');
