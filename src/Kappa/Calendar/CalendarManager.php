@@ -20,14 +20,14 @@ use Nette\Object;
 class CalendarManager extends Object
 {
 	/**
-	 * @param array $day
+	 * @param DateTime $day
 	 * @return bool
 	 */
-	public function isActualDay(array $day)
+	public function isActualDay(DateTime $day = null)
 	{
 		$actualDate = new DateTime();
 		$actualDate->setTime(0, 0, 0);
-		if (isset($day['datetime']) && $day['datetime'] == $actualDate) {
+		if ($day === $actualDate) {
 			return true;
 		} else {
 			return false;
