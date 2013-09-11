@@ -27,7 +27,7 @@ class CalendarHelper extends Object
 	{
 		$actualDate = new DateTime();
 		$actualDate->setTime(0, 0, 0);
-		if ($day === $actualDate) {
+		if ($day == $actualDate) {
 			return true;
 		} else {
 			return false;

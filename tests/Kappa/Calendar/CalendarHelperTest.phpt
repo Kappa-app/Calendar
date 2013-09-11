@@ -35,10 +35,10 @@ class CalendarManagerTest extends TestCase
 
 	public function testIsActualDay()
 	{
-		Assert::false($this->calendarManager->isActualDay(array('day' => 5, 'datetime' => new DateTime('5.3.2013'))));
+		Assert::false($this->calendarManager->isActualDay(new DateTime('1.1.1900')));
 		$date = new DateTime();
 		$date->setTime(0, 0, 0);
-		Assert::true($this->calendarManager->isActualDay(array('day' => date('d'), 'datetime' => $date)));
+		Assert::true($this->calendarManager->isActualDay($date));
 	}
 }
 

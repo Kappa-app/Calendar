@@ -41,9 +41,9 @@ class CalendarControlTest extends TestCase
 
 	public function testSetManager()
 	{
-		Assert::same(null, $this->getReflection()->invokeProperty($this->calendarControl, 'manager'));
+		Assert::same(null, $this->getReflection()->invokeProperty($this->calendarControl, 'helper'));
 		$calendar = new CalendarControl($this);
-		Assert::same($this, $this->getReflection()->invokeProperty($calendar, 'manager'));
+		Assert::same($this, $this->getReflection()->invokeProperty($calendar, 'helper'));
 	}
 }
 

@@ -42,9 +42,9 @@ class CalendarFactoryTest extends TestCase
 
 	public function testSetManager()
 	{
-		Assert::same(null, $this->getReflection()->invokeProperty($this->calendarFactory, 'manager'));
-		$this->calendarFactory->setManager($this);
-		Assert::same($this, $this->getReflection()->invokeProperty($this->calendarFactory, 'manager'));
+		Assert::same(null, $this->getReflection()->invokeProperty($this->calendarFactory, 'helper'));
+		$this->calendarFactory->setHelper($this);
+		Assert::same($this, $this->getReflection()->invokeProperty($this->calendarFactory, 'helper'));
 	}
 
 	public function testCreate()
