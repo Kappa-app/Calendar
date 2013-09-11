@@ -17,7 +17,7 @@ use Nette\Object;
  * Class CalendarManager
  * @package Kappa\Calendar
  */
-class CalendarManager extends Object
+class CalendarHelper extends Object
 {
 	/**
 	 * @param DateTime $day

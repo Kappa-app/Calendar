@@ -28,8 +28,8 @@ interface ICalendarFactory
 	public function setTemplate($template);
 
 	/**
-	 * @param mixed|null $manager
+	 * @param mixed|null $helper
 	 * @return void
 	 */
-	public function setManager($manager);
+	public function setHelper($helper);
 }

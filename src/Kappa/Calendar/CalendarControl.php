@@ -26,16 +26,16 @@ class CalendarControl extends Control
 	private $fileTemplate;
 
 	/** @var mixed|null */
-	private $manager;
+	private $helper;
 
 	/**
-	 * @param mixed|null $manager
+	 * @param mixed|null $helper
 	 */
-	public function __construct($manager = null)
+	public function __construct($helper = null)
 	{
 		parent::__construct();
 		$this->date = new DateTime();
-		$this->manager = $manager;
+		$this->helper = $helper;
 	}
 
 	/**
@@ -109,7 +109,7 @@ class CalendarControl extends Control
 		$this->template->setFile($this->fileTemplate ? :  __DIR__ . '/Templates/default.latte');
 		$this->template->date = $this->date;
 		$this->template->calendar = $this->createCalendar();
-		$this->template->manager = $this->manager;
+		$this->template->helper = $this->helper;
 		$this->template->render();
 	}
 }

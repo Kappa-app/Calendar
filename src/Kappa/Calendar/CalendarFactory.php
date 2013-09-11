@@ -22,7 +22,7 @@ class CalendarFactory implements ICalendarFactory
 	private $template;
 
 	/** @var mixed */
-	private $manager;
+	private $helper;
 
 	/**
 	 * @param null|string $template
@@ -37,11 +37,11 @@ class CalendarFactory implements ICalendarFactory
 	}
 
 	/**
-	 * @param mixed $manager
+	 * @param mixed $helper
 	 */
-	public function setManager($manager)
+	public function setHelper($helper)
 	{
-		$this->manager = $manager;
+		$this->helper = $helper;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class CalendarFactory implements ICalendarFactory
 	 */
 	public function create()
 	{
-		$calendar = new CalendarControl($this->manager);
+		$calendar = new CalendarControl($this->helper);
 		$calendar->setTemplate($this->template);
 
 		return $calendar;

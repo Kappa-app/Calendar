@@ -12,7 +12,7 @@
 
 namespace Kappa\Calendar\Tests;
 
-use Kappa\Calendar\CalendarManager;
+use Kappa\Calendar\CalendarHelper;
 use Kappa\Tester\TestCase;
 use Nette\DateTime;
 use Tester\Assert;
@@ -25,12 +25,12 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class CalendarManagerTest extends TestCase
 {
-	/** @var \Kappa\Calendar\CalendarManager */
+	/** @var \Kappa\Calendar\CalendarHelper */
 	private $calendarManager;
 
 	protected function setUp()
 	{
-		$this->calendarManager = new CalendarManager();
+		$this->calendarManager = new CalendarHelper();
 	}
 
 	public function testIsActualDay()
