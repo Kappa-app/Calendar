@@ -15,6 +15,7 @@ namespace Kappa\Calendar\Tests;
 use Kappa\Calendar\CalendarControl;
 use Kappa\Calendar\CalendarFactory;
 use Kappa\Tester\TestCase;
+use Nette\Utils\DateTime;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -33,23 +34,21 @@ class CalendarFactoryTest extends TestCase
 		$this->calendarFactory = new CalendarFactory();
 	}
 
-	public function testSetTemplate()
-	{
-		Assert::same(null, $this->getReflection()->invokeProperty($this->calendarFactory, 'template'));
-		$this->calendarFactory->setTemplate(__FILE__);
-		Assert::same(__FILE__, $this->getReflection()->invokeProperty($this->calendarFactory, 'template'));
-	}
-
-	public function testSetManager()
-	{
-		Assert::same(null, $this->getReflection()->invokeProperty($this->calendarFactory, 'helper'));
-		$this->calendarFactory->setHelper($this);
-		Assert::same($this, $this->getReflection()->invokeProperty($this->calendarFactory, 'helper'));
-	}
-
 	public function testCreate()
 	{
-		Assert::equal(new CalendarControl(), $this->calendarFactory->create());
+		$calendar = $this->calendarFactory->create(new DateTime('2015-03-01'));
+		Assert::null($calendar[1][1]);
+		Assert::null($calendar[1][2]);
+		Assert::null($calendar[1][3]);
+		Assert::null($calendar[1][4]);
+		Assert::null($calendar[1][5]);
+		Assert::null($calendar[1][6]);
+		Assert::equal(new DateTime('2015-03-01'), $calendar[1][7]);
+		Assert::equal(new DateTime('2015-03-31'), $calendar[6][2]);
+		Assert::null($calendar[6][3]);
+		Assert::null($calendar[6][4]);
+		Assert::null($calendar[6][5]);
+		Assert::null($calendar[6][6]);
 	}
 }
 

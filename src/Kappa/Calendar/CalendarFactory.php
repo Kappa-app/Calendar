@@ -11,47 +11,57 @@
 namespace Kappa\Calendar;
 
 use Kappa;
+use Nette\Object;
+use Nette\Utils\DateTime;
 
 /**
  * Class CalendarFactory
  * @package Kappa\Calendar
  */
-class CalendarFactory
+class CalendarFactory extends Object
 {
-	/** @var string */
-	private $template;
-
-	/** @var mixed */
-	private $helper;
-
 	/**
-	 * @param null|string $template
-	 * @throws TemplateNotFoundException
+	 * @param DateTime $date
+	 * @return array
 	 */
-	public function setTemplate($template)
+	public function create(DateTime $date)
 	{
-			if (!is_file($template)) {
-				throw new TemplateNotFoundException("Template {$template} has not been found");
+		$calendar = array();
+		$itemNumber = 1;
+		$firstDay = $this->getFirstDay($date);
+		$endDay = $firstDay + $this->getCountOfDays($date);
+		for ($line = 1; $line <= 6; $line++) {
+			for ($column = 1; $column <= 7; $column++) {
+				$calendar[$line][$column] = null;
+				if ($itemNumber >= $firstDay && $itemNumber < $endDay) {
+					$dayNumber = $itemNumber - $firstDay + 1;
+					$dayDate = "{$date->format('Y')}-{$date->format('m')}-{$dayNumber}";
+					$calendar[$line][$column] = new DateTime($dayDate);
+				}
+				$itemNumber++;
 			}
-			$this->template = $template;
-	}
-
-	/**
-	 * @param mixed $helper
-	 */
-	public function setHelper($helper)
-	{
-		$this->helper = $helper;
-	}
-
-	/**
-	 * @return CalendarControl
-	 */
-	public function create()
-	{
-		$calendar = new CalendarControl($this->helper);
-		$calendar->setTemplate($this->template);
+		}
 
 		return $calendar;
+	}
+
+	/**
+	 * @param DateTime $date
+	 * @return int
+	 */
+	private function getFirstDay(DateTime $date)
+	{
+		$date = $date->setDate($date->format('Y'), $date->format('m'), 1);
+
+		return (int)$date->format('N');
+	}
+
+	/**
+	 * @param DateTime $date
+	 * @return int
+	 */
+	private function getCountOfDays(DateTime $date)
+	{
+		return (int)$date->format('t');
 	}
 }
