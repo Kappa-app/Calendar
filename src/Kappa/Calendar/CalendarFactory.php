@@ -16,7 +16,7 @@ use Kappa;
  * Class CalendarFactory
  * @package Kappa\Calendar
  */
-class CalendarFactory implements ICalendarFactory
+class CalendarFactory
 {
 	/** @var string */
 	private $template;
