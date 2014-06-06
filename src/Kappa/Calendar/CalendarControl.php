@@ -22,6 +22,9 @@ class CalendarControl extends Control
 	/** @var string @persistent */
 	public $date;
 
+	/** @var string */
+	private $fileTemplate;
+
 	public function handleNext()
 	{
 		$date = new DateTime($this->date);
@@ -47,11 +50,26 @@ class CalendarControl extends Control
 	}
 
 	/**
+	 * @param string $file
+	 * @return $this
+	 */
+	public function setTemplate($file)
+	{
+		$this->fileTemplate = $file;
+
+		return $this;
+	}
+
+	/**
 	 * @param string|null $file
 	 */
 	public function render($file = null)
 	{
-		$this->template->setFile(($file) ? : __DIR__ . '/templates/calendar.latte');
+		$template = ($this->fileTemplate) ? : __DIR__ . '/templates/calendar.latte';
+		if ($file) {
+			$template = $file;
+		}
+		$this->template->setFile($template);
 		$this->template->calendar = new Calendar(new DateTime($this->date));
 		$this->template->render();
 	}
