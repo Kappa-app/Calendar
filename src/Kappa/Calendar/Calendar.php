@@ -70,7 +70,7 @@ class Calendar extends Object
 	 */
 	public function nextYear()
 	{
-		$this->setYear((int)$this->actualDate->format('Y') + 1);
+		$this->actualDate->modify('+1 year');
 
 		return $this;
 	}
@@ -80,7 +80,7 @@ class Calendar extends Object
 	 */
 	public function prevYear()
 	{
-		$this->setYear((int)$this->actualDate->format('Y') - 1);
+		$this->actualDate->modify('-1 year');
 
 		return $this;
 	}
@@ -90,7 +90,7 @@ class Calendar extends Object
 	 */
 	public function nextMonth()
 	{
-		$this->setMonth((int)$this->actualDate->format('m') + 1);
+		$this->actualDate->modify('+1 month');
 
 		return $this;
 	}
@@ -100,7 +100,7 @@ class Calendar extends Object
 	 */
 	public function prevMonth()
 	{
-		$this->setMonth((int)$this->actualDate->format('m') - 1);
+		$this->actualDate->modify('-1 month');
 
 		return $this;
 	}
