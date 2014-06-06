@@ -1,117 +1,66 @@
-#Kappa/Calendar [![Build Status](https://travis-ci.org/Kappa-org/Calendar.png?branch=master)](https://travis-ci.org/Kappa-org/Calendar)
+# Kappa\Calendar [![Build Status](https://travis-ci.org/Kappa-org/Calendar.png?branch=master)](https://travis-ci.org/Kappa-org/Calendar)
 
 Component for generation calendar prepared for next work with it
 
-##Requirements:
+## Requirements:
 
 * PHP 5.3 or higher
 * [Composer](http://getcomposer.org/)
-* [Nette Framework](http://nette.org)
-* [nette.ajax.js](https://github.com/vojtech-dobes/nette.ajax.js/)
+* [nette/application](https://github.com/nette/application) 2.2 or higher
+* [nette/di](https://github.com/nette/di) 2.2 or higher
 
-##Installation
-The best way to install Kappa/FileSystem is using Composer:
+## Installation
+The best way to install kappa/calendar is using Composer:
 ```bash
-$ composer require kappa/filesystem:@dev
+$ composer require kappa/calendar:@dev
 ```
-
-Register Kappa\Calendar\CalendarFactory class
+And now you have to register the extensions in ```config.neon```
 
 ```yaml
-services:
-	- Kappa\Calendar\CalendarFactory
+extensions:
+	- Kappa\Calendar\CalendarExtension
 ```
 
-and use nette.ajax.js
-```javascript
-$.nette.init()
-```
+## Usages
 
-###Usages
-and next add component into presenter
+You can use default component with default or custom template
 
 ```php
 /**
  * @inject
- * @var \Kappa\Calendar\ICalendarFactory
+ * @var \Kappa\Calendar\ICalendarControlFactory
  */
-public $calendarFactory;
+public $calendarControlFactory;
 
 /**
  * @return \Kappa\Calendar\CalendarControl
  */
 protected function createComponentCalendar()
 {
-	return $this->calendarFactory->create();
+	return $this->calendarControlFactory->create();
 }
 ```
 
-you can add custom template with
+with custom template
+
 ```php
 /**
  * @return \Kappa\Calendar\CalendarControl
  */
 protected function createComponentCalendar()
 {
-	$calendar = $this->calendarFactory;
-	$calendar->setTemplate(/* path to template */);
-	return $calendar->create();
+	$calendar = $this->calendarControlFactory->create();
+	$calendar->setTemplate('template.latte');
+
+	return $calendar;
 }
 ```
 
-and you can add manager for work with day with
-```php
-/**
- * @return \Kappa\Calendar\CalendarControl
- */
-protected function createComponentCalendar()
-{
-	$calendar = $this->calendarFactory;
-	$calendar->setManager(new MyCalendarManager);
-	return $calendar->create();
-}
-```
-and your manager you can use with ```$manager``` variable in template
+or in template
 
-## Examples:
-
-**Presenter**
-```php
-/**
- * @inject
- * @var \Kappa\Calendar\ICalendarFactory
- */
-public $calendarFactory;
-
-/**
- * @inject
- * @var \Kappa\Calendar\CalendarManager
- */
-public $calendarManager;
-
-/**
- * @return \Kappa\Calendar\CalendarControl
- */
-protected function createComponentCalendar()
-{
-	$calendar = $this->calendarFactory;
-	$calendar->setTemplate(__DIR__ . '/../templates/components/calendar.latte');
-	$calendar->setManager($this->calendarManager);
-	return $calendar->create();
-}
-```
-
-**Tempalte**
 ```html
-<tr n:foreach="$calendar as $row">
-	<td n:foreach="$row as $dayNumber => $day"{if $manager->isActualDay($day)} class="active"{/if}>
-		{if count($day) !== 0}
-			{$day['day']}
-		{/if}
-	</td>
-</tr>
+{control calendar 'template.latte'}
 ```
 
-Variable $manager contain default manager with method for check actual day
-
-
+In template will be ```$calendar``` variable contains Calendar object for more info please see into
+[default template](https://github.com/Kappa-app/Calendar/blob/master/src/Kappa/Calendar/templates/calendar.latte)
