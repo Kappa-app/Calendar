@@ -2,25 +2,25 @@
 	<table border="0">
 		<thead>
 		<tr>
-			<td colspan="2"><a n:href="PrevMonth! $date->format('d.m.Y')" class="ajax"><<</a></td>
-			<td colspan="3">{*$actualMonth} {$actualYear*}{$date->format('F Y')}</td>
-			<td colspan="2"><a n:href="NextMonth! $date->format('d.m.Y')" class="ajax">>></a></td>
+			<td colspan="2"><a n:href="prev!" class="ajax"><<</a></td>
+			<td colspan="3">{$calendar->getDate()->format('F Y')}</td>
+			<td colspan="2"><a n:href="next!" class="ajax">>></a></td>
 		</tr>
 		<tr>
-			<td>PO</td>
-			<td>ÚT</td>
-			<td>ST</td>
-			<td>ČT</td>
-			<td>PÁ</td>
-			<td>SO</td>
-			<td>NE</td>
+			<td>Mon</td>
+			<td>Tue</td>
+			<td>Wed</td>
+			<td>Thu</td>
+			<td>Fri</td>
+			<td>Sat</td>
+			<td>Sun</td>
 		</tr>
 		</thead>
 		<tbody>
-		<tr n:foreach="$calendar as $row">
-			<td n:foreach="$row as $dayNumber => $day"{if $manager->isActualDay($day)} class="active"{/if}>
-				{if isset($day['day'])}
-					{$day['day']}
+		<tr n:foreach="$calendar->getCalendar() as $line">
+			<td n:foreach="$line as $day">
+				{if $day}
+					{$day->format('d')}
 				{/if}
 			</td>
 		</tr>
