@@ -142,7 +142,7 @@ class Calendar extends Object
 	 */
 	private function getFirstDay()
 	{
-		$date = clone $this->getDate();
+		$date = $this->getDate();
 		$date = $date->setDate($date->format('Y'), $date->format('m'), 1);
 
 		return (int)$date->format('N');
@@ -153,7 +153,8 @@ class Calendar extends Object
 	 */
 	private function getCountOfDays()
 	{
-		$date = clone $this->getDate();
+		$date = $this->getDate();
+
 		return (int)$date->format('t');
 	}
 } 
