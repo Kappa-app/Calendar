@@ -11,7 +11,7 @@
 namespace Kappa\Calendar;
 
 use Nette\Application\UI\Control;
-use Nette\DateTime;
+use Nette\Utils\DateTime;
 
 /**
  * Class CalendarControl
@@ -19,97 +19,40 @@ use Nette\DateTime;
  */
 class CalendarControl extends Control
 {
-	/** @var \Nette\DateTime */
-	private $date;
+	/** @var string @persistent */
+	public $date;
 
-	/** @var string */
-	private $fileTemplate;
-
-	/** @var mixed|null */
-	private $helper;
-
-	/**
-	 * @param mixed|null $helper
-	 */
-	public function __construct($helper = null)
+	public function handleNext()
 	{
-		parent::__construct();
-		$this->date = new DateTime();
-		$this->helper = $helper;
-	}
-
-	/**
-	 * @param string $template
-	 * @throws TemplateNotFoundException
-	 */
-	public function setTemplate($template)
-	{
-		$this->fileTemplate = $template;
-	}
-
-	/**
-	 * @param string $date
-	 */
-	public function handlePrev($date)
-	{
-		$date = new DateTime($date);
-		$this->date = $date->modify('-1 month');
+		$date = new DateTime($this->date);
+		$date->modify('+1 month');
+		$this->date = $date->format('Y-m-d');
 		if ($this->presenter->isAjax()) {
-			$this->invalidateControl('calendar');
+			$this->redrawControl('kappa-calendar');
+		} else {
+			$this->redirect('this');
+		}
+	}
+
+	public function handlePrev()
+	{
+		$date = new DateTime($this->date);
+		$date->modify('-1 month');
+		$this->date = $date->format('Y-m-d');
+		if ($this->presenter->isAjax()) {
+			$this->redrawControl('kappa-calendar');
 		} else {
 			$this->redirect('this');
 		}
 	}
 
 	/**
-	 * @param string $date
+	 * @param string|null $file
 	 */
-	public function handleNext($date)
+	public function render($file = null)
 	{
-		$date = new DateTime($date);
-		$this->date = $date->modify('+1 month');
-		if ($this->presenter->isAjax()) {
-			$this->invalidateControl('calendar');
-		} else {
-			$this->redirect('this');
-		}
-	}
-
-	/**
-	 * @return array
-	 */
-	private function createCalendar()
-	{
-		$calendar = array();
-		$day = 1;
-		$date = $this->date;
-		for ($i = 0; $i <= 5; $i++) {
-			for ($y = 1; $y <= 7; $y++) {
-				$firstDay = $date->setDate($this->date->format('Y'), $this->date->format('m'), 1)
-					->format('N');
-				if ($i * 7 + $y >= $firstDay) {
-					if ($day <= $this->date->format('t')) {
-						$dayDate = "{$this->date->format('Y')}-{$this->date->format('m')}-{$day} 00:00:00";
-						$calendar[$i][$y] = new DateTime($dayDate);
-						$day++;
-					} else {
-						$calendar[$i][$y] = null;
-					}
-				} else {
-					$calendar[$i][$y] = null;
-				}
-			}
-		}
-
-		return $calendar;
-	}
-
-	public function render()
-	{
-		$this->template->setFile($this->fileTemplate ? :  __DIR__ . '/Templates/default.latte');
-		$this->template->date = $this->date;
-		$this->template->calendar = $this->createCalendar();
-		$this->template->helper = $this->helper;
+		$this->template->setFile(($file) ? : __DIR__ . '/templates/calendar.latte');
+		$this->template->calendar = new Calendar(new DateTime($this->date));
 		$this->template->render();
 	}
 }
